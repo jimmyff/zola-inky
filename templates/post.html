@@ -23,7 +23,7 @@
   {% if page.taxonomies is containing ("tags") %}
   <ul class="tags">
     {% for tag in page.taxonomies["tags"] %}
-      <li><a href='/tags/{{ tag | slugify }}'>{{ tag }}</a></li>
+      <li><a href='{{ config.base_url | safe }}/tags/{{ tag | slugify }}'>{{ tag }}</a></li>
     {% endfor %}
   </ul>
   {% endif %}
