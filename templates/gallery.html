@@ -1,0 +1,25 @@
+
+{% extends "base.html" %} {% block content %}
+<h1 class="title">{{ section.title }}</h1>
+
+<article>{{ section.content | safe }}</article>
+
+{% for year, posts in section.pages | group_by(attribute="year") %}
+<ul class="gallery flat">
+  <h2 class="archive-year">{{ year }}</h2>
+  {% for post in posts %}
+  {% if post.extra.images  %}
+  {% for image in post.extra.images %}
+  {# { set image = resize_image(path=post.path ~ image, width=256, height=256, format=config.extra.image_format, quality=config.extra.thumbnail_quality) %} #}
+  <li class="thumbnail">
+    <a href="{{ post.permalink | safe }}" title="{{ post.title }} - {{ post.date }}">
+      {{ images::responsive_thumbnail(path="", src=post.path ~ image, default_size=128, sizes=[128,256], alt=post.title  ~ " - "  ~ post.date ) }}
+    </a>
+
+  </li>
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endfor %} {% endblock content %}
+

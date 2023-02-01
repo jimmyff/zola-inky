@@ -1,0 +1,134 @@
+{% import "macros/head.html" as head -%}
+{% import "macros/opengraph.html" as social -%}
+{% import "macros/hooks.html" as hooks -%}
+{% import "macros/images.html" as images -%}
+
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head> 
+    {%- block general_meta -%}
+    {{ head::general_meta() }}
+    {%- endblock general_meta -%}
+    {%- block og_preview -%} 
+    {{ social::og_preview() }}
+    {%-endblock og_preview -%} 
+    {% block rss %}
+    <link rel="alternate"
+          type="application/rss+xml"
+          title="{{config.title}}"
+          href="{{ get_url(path='atom.xml',trailing_slash=false)|safe}}"> {%
+    endblock %}
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">  -->
+    <link href="https://fonts.googleapis.com/css2?family=Andada+Pro&display=swap&family=Playfair+Display"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="{{ get_url(path='base.css',trailing_slash=false)|safe}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+            integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        {% if config.extra.avatar %}
+		<div class="avatar">
+			<a href="/">
+                {{ images::responsive_image(path="", src=config.extra.avatar, default_size=128, sizes=[64,128,256,512], alt=config.title  ) }}
+			</a>
+		</div>
+	    {% endif %}
+        <a class="site-name"
+           href="/">
+            <h1>{{ config.title }}</h1>
+        </a>
+        <div class="site-description">
+            <p>{{ config.description }}</p>
+        </div>
+        <nav>
+            <div class="links"> 
+            {% for menu_link in config.extra.menu_links %}
+                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) %} 
+                <a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
+                href="{{ link_url | safe}} ">{{menu_link.name}}</a> 
+            {% endfor %} 
+            </div>
+        </nav>
+    </header>
+    <article>
+    {% block content %} 
+    {% endblock %}
+    </article>
+    <footer>
+        <div class="social">
+            <ul> 
+                {# Github #} 
+                {% if config.extra.link_github_username %}
+                <li>
+                    <a href="https://github.com/{{ config.extra.link_github_username }}"
+                       title="Github" rel="me"><i data-feather="github"></i></a>
+                </li>
+                {% endif %} 
+
+                {# Mastadon #} 
+                {% if config.extra.link_mastodon_url %}
+                <li>
+                    <a href="{{ config.extra.link_mastodon_url }}"
+                       title="Mastodon" rel="me"><i data-feather="message-square"></i></a>
+                </li> 
+                {% endif %} 
+
+                {# Twitter #} 
+                {% if config.extra.link_twitter_username %}
+                <li>
+                    <a href="https://twitter.com/{{ config.extra.link_twitter_username }}"
+                       title="Twitter"
+                       rel="me"><i data-feather="twitter"></i></a>
+                </li>
+                {% endif %} 
+
+                {# Instagram #}
+                {% if config.extra.link_instagram_username %}
+                <li>
+                    <a href="https://www.instagram.com/jimmyff_art/{{ config.extra.link_instagram_username }}"
+                       title="Medium"
+                       rel="me"><i data-feather="instagram"></i></a>
+                </li>
+                {% endif %} 
+
+                {# Medium #}
+                {% if config.extra.link_medium_username %}
+                <li>
+                    <a href="https://medium.com/@{{ config.extra.link_medium_username }}"
+                       title="Medium"
+                       rel="me"><i data-feather="file-text"></i></a>
+                </li>
+                {% endif %} 
+
+                {# RSS feed #}
+                <li>
+                    <a href="{{ get_url(path='atom.xml',trailing_slash=false)|safe }}"
+                       title="{{config.title}}"><i data-feather="rss"></i></a>
+                </li>
+            </ul>
+        </div>
+        <p> © {{ config.title }} {{ now() | date(format="%Y") }}
+
+        {#  If you remove the powered by information, it would be appreciated if 
+            you could add information & links somewhere else on your site to credit 
+            those that have created your tools. #}
+        {% if config.extra.disable_powered_by and config.extra.disable_powered_by == true %}{% else %}<br>Powered by <a target="_blank" href="https://getzola.org/">Zola</a>. Theme: <a target="_blank" href="https://github.com/jimmyff/zola-inky">Inky</a>.{% endif %}
+        </p>
+    </footer>
+    <script>
+        feather.replace();
+    </script> 
+    {% block body_end %} 
+    {% endblock %}
+</body>
+
+</html>

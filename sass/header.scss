@@ -1,0 +1,89 @@
+header {
+  margin: 2rem 0;
+}
+
+header .avatar {
+  float: left;
+  margin: 0 2rem 0 0;
+}
+
+header .links {
+  line-height: 2.2rem;
+}
+
+header .avatar img {
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
+header .site-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    margin: 0 0 1rem 0;
+  }
+}
+
+header h1 {
+  margin: 0;
+  // line-height: 0.2rem;
+}
+
+.social li,
+.social ul {
+  margin: 0;
+  padding: 0;
+}
+
+.social li {
+  display: inline-block;
+  list-style: none;
+  margin: 0 30px 0 0;
+}
+
+.social a {
+  color: #333;
+}
+
+.social a:hover {
+  color: var(--primary);
+}
+
+.social nav {
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-width: 50px;
+  margin-left: 15px;
+}
+
+.social ul svg {
+  max-height: 15px;
+}
+
+nav {
+  border-top: 1px solid var(--light-grey);
+  padding-top: 1rem;
+}
+
+nav a {
+  margin-right: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .social li {
+    margin: 0;
+  }
+
+  nav a {
+    margin-right: 0.5rem;
+  }
+
+  header {
+    margin: 1rem 0;
+  }
+}

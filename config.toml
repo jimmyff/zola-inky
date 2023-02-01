@@ -1,0 +1,73 @@
+title = "Zola Inky"
+description = "An elegant and understated theme for Zola"
+
+# The URL the site will be built for
+base_url = "http://127.0.0.1:1111"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+default_language = "en"
+
+# The taxonomies to be rendered for the site and their configuration of the default languages
+# Example:
+#     taxonomies = [
+#       {name = "tags", feed = true}, # each tag will have its own feed
+#       {name = "tags"}, # you can have taxonomies with the same name in multiple languages
+#       {name = "categories", paginate_by = 5},  # 5 items per page for a term
+#       {name = "authors"}, # Basic definition: no feed or pagination
+#     ]
+#
+taxonomies = [{ name = "tags", lang = "en", rss = true }]
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
+[extra]
+
+# Place your avatar in your /static folder
+avatar = "/inky.png"
+
+keywords = "zola, theme, ink, hugo-ink"
+
+search_enabled = false
+
+
+image_resizing_disabled = false
+image_format = "auto"           # "auto", "jpg", "png", "webp"
+
+# responsive image shortcode 
+# example: {{ image(src="foo.jpeg", alt="some image") }}
+image_quality = 80
+images_default_size = 1024
+images_sizes = [512, 1024, 2048]
+
+thumbnail_quality = 70
+thumbnail_default_size = 256
+thumbnail_sizes = [128, 256]
+
+
+link_github_username = "jimmyff/zola-inky"
+# link_twitter_username = ""
+# link_mastodon_url = ""
+# link_medium_username = ""
+# link_instagram_username = ""
+
+menu_links = [
+    { url = "$BASE_URL/", name = "About" },
+    { url = "$BASE_URL/posts/", name = "Posts" },
+    { url = "$BASE_URL/gallery/", name = "Gallery" },
+    { url = "$BASE_URL/tags/", name = "Tags" },
+    # { url = "https://github.com/jimmyff/zola-inky", name = "Github" },
+    { url = "$BASE_URL/search/", name = "Search" },
+]

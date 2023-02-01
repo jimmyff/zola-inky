@@ -1,0 +1,19 @@
+name = "zola-inky"
+description = "Simple theme"
+license = "MIT"
+homepage = "https://github.com/getzola/hyde"
+# The minimum version of Zola required
+min_version = "0.4.0"
+# An optional live demo URL
+demo = ""
+
+[extra]
+
+[author]
+name = "jimmyff"
+homepage = "https://www.jimmyff.co.uk"
+
+[original]
+author =  "mr-karan"
+homepage = "https://mrkaran.dev/"
+repo = "https://github.com/mr-karan/website"

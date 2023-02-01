@@ -1,0 +1,117 @@
+.posts {
+  margin: 0;
+  padding: 0;
+}
+
+.post {
+  display: block;
+
+  article {
+    img {
+      // max-width: 800px;
+      max-height: 90vh;
+
+      border-radius: var(--border-radius);
+    }
+  }
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+}
+
+.post-header .meta .date {
+  margin-right: 2rem;
+  width: 64px;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.post-header .meta .date .day {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  line-height: 0.75em;
+  font-size: 2em;
+  display: block;
+  margin: 0 0 0.5rem 0;
+}
+
+.post-header .meta .date .rest {
+  display: block;
+  font-size: 0.75em;
+}
+
+.post .title.small {
+  margin: 0 0 10px 0;
+}
+
+.post .post-header {
+  margin: 30px 0;
+}
+
+.post-header h1.title {
+  margin: -10px 0 0 0;
+}
+
+.archive-year {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.archive-year:before,
+.archive-year:after {
+  content: "";
+  border-top: 1px solid var(--light-grey);
+  margin: 0 20px 0 0;
+  flex: 1 0 20px;
+}
+
+.archive-year:after {
+  margin: 0 0 0 20px;
+}
+
+.youtube {
+
+  position: relative;
+  padding-bottom: 56.25%;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.draft {
+  color: var(--red);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+
+  li {
+    display: inline-block;
+
+
+    a {
+      display: block;
+      margin: 0.25rem;
+      padding: 0.25rem 1rem;
+      font-size: 0.9em;
+      background-color: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--border-radius);
+    }
+
+  }
+}
