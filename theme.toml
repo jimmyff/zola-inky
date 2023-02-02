@@ -1,11 +1,11 @@
 name = "zola-inky"
-description = "Simple theme"
+description = "An elegant and understated theme for Zola"
 license = "MIT"
-homepage = "https://github.com/getzola/hyde"
+homepage = "https://github.com/jimmyff/zola-inky"
 # The minimum version of Zola required
 min_version = "0.4.0"
 # An optional live demo URL
-demo = ""
+demo = "https://jimmyff.github.io/zola-inky/"
 
 [extra]
 
@@ -14,6 +14,6 @@ name = "jimmyff"
 homepage = "https://www.jimmyff.co.uk"
 
 [original]
-author =  "mr-karan"
-homepage = "https://mrkaran.dev/"
+author = "mr-karan"
+homepage = "https://mrkaran.dev"
 repo = "https://github.com/mr-karan/website"
