@@ -1,5 +1,5 @@
 +++
-title = "Reponsive images"
+title = "Responsive images"
 date = 2023-01-12
 [taxonomies]
 tags= ["Zola", "Theme", "gallery"]
