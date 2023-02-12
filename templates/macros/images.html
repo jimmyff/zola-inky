@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 
+
+{% macro image(path, src, alt, class="") %}
+<img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=path ~ src) | safe }}" class="{{ class }}" />
+{% endmacro image %}
+
 {# 
     Original author: crepererum https://github.com/getzola/even/pull/48/files 
     Adapted to Inky template by jimmyff
 #}
 
-{% macro responsive_image(path, src, alt, default_size, sizes) %}
+{% macro responsive_image(path, src, alt, default_size, sizes, class="") %}
 {% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true %}
-<img alt="{{ alt }}" src="{{ src | safe }}" />
+{{ image(path=path, src=src, alt=alt, class=class) }}
 {% else %}
-    {% set abspath = "./" ~ path ~ src  %}
+    {% set abspath = path ~ src  %}
     {% set meta = get_image_metadata(path=abspath) %}
     {% set width = meta.width %}
     {% set srcset_list = [] %}
@@ -21,16 +26,16 @@
     {% endif %}
     {% endfor %}
     {% set default_resized = resize_image(format=config.extra.image_format, path=abspath, width=default_size, op="fit_width", quality=config.extra.image_quality) %}
-    <img alt="{{ alt }}" src="{{ default_resized.url | safe }}" srcset="{{ srcset_list | join(sep=", ") | safe }}" />
+    <img alt="{{ alt }}" title="{{ alt }}" src="{{ default_resized.url | safe }}" srcset="{{ srcset_list | join(sep=", ") | safe }}" class="{{ class }}" />
 {% endif %}
 {% endmacro responsive_image %}
 
 
-{% macro responsive_thumbnail(path, src, alt, default_size, sizes) %}
+{% macro responsive_thumbnail(path, src, alt, default_size, sizes, class="") %}
 {% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true %}
-    <img alt="{{ alt }}" src="{{ src | safe }}" />
+{{ image(path=path, src=src, alt=alt, class=class) }}
 {% else %}
-    {% set abspath = "./" ~ path ~ src  %}
+    {% set abspath = path ~ src  %}
     {% set meta = get_image_metadata(path=abspath) %}
     {% set width = meta.width %}
     {% set srcset_list = [] %}
@@ -42,6 +47,6 @@
     {% endif %}
     {% endfor %}
     {% set default_resized = resize_image(format=config.extra.image_format, path=abspath, width=default_size, height=default_size, op="fill", quality=config.extra.thumbnail_quality) %}
-    <img alt="{{ alt }}" src="{{ default_resized.url | safe }}" srcset="{{ srcset_list | join(sep=", ") | safe }}" />
+    <img alt="{{ alt }}" title="{{ alt }}" src="{{ default_resized.url | safe }}" srcset="{{ srcset_list | join(sep=", ") | safe }}" class="{{ class }}" />
 {% endif %}
 {% endmacro responsive_thumbnail %}

@@ -10,8 +10,14 @@
     img {
       // max-width: 800px;
       max-height: 90vh;
-
       border-radius: var(--border-radius);
+
+      &.small {
+
+        max-height: none;
+        width: 100%;
+        max-width: 500px;
+      }
     }
   }
 }
@@ -98,6 +104,7 @@
   list-style: none;
   padding: 0;
   margin: 1rem 0;
+
 
   li {
     display: inline-block;

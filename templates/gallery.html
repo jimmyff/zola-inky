@@ -13,7 +13,7 @@
   {# { set image = resize_image(path=post.path ~ image, width=256, height=256, format=config.extra.image_format, quality=config.extra.thumbnail_quality) %} #}
   <li class="thumbnail">
     <a href="{{ post.permalink | safe }}" title="{{ post.title }} - {{ post.date }}">
-      {{ images::responsive_thumbnail(path="", src=post.path ~ image, default_size=128, sizes=[128,256], alt=post.title  ~ " - "  ~ post.date ) }}
+      {{ images::responsive_thumbnail(path=post.colocated_path, src=image, default_size=128, sizes=[128,256], alt=post.title  ~ " - "  ~ post.date ) }}
     </a>
 
   </li>

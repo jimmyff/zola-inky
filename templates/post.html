@@ -15,11 +15,11 @@
       <h1 class="title">{{ page.title }} {% if page.draft %}<span class="draft">Draft</span>{% endif %}</h1>
     </div>
   </div>
-  {{ hooks::above_page(page=page) }}  
+  {{ hooks::post_above_content(page=page) }}  
   <article>{{ page.content | safe }}</article>
 
   
-  {{ hooks::below_page(page=page) }}  
+  {{ hooks::post_below_content(page=page) }}  
   {% if page.taxonomies is containing ("tags") %}
   <ul class="tags">
     {% for tag in page.taxonomies["tags"] %}
@@ -28,6 +28,6 @@
   </ul>
   {% endif %}
   
-  {{ hooks::below_tags(page=page) }}  
+  {{ hooks::post_below_tags(page=page) }}  
 </section>
 {% endblock content %}

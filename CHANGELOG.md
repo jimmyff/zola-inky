@@ -3,6 +3,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1]
+
+- Set zola minimum version to 0.17
+- Updated responsive images to use the new `page.colocated_path`
+- Hooks names updated for consistency
+- Added class parameter for responsive images
+- Added `images::image()` macro and `image_original` shortcode for images that don't want resizing (eg: animated gifs)
+
 ## [1.0]
 
 - Packaged the theme based on the work of mr-karan and hugo-ink

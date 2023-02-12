@@ -16,11 +16,11 @@
           </div>
         </div>
         <div class="matter">
-          <h4 class="title small">
+          <div class="title small">
             <a href="{{ post.permalink | safe }}">{{ post.title }}</a>
             {% if post.draft %}<span class="draft">Draft</span>{% endif %}
-          </h4>
-          <span class="description"> {{post.description}} </span>
+          </div>
+          {{ hooks::posts_below_title(page=post) }} 
         </div>
       </div>
     </li>

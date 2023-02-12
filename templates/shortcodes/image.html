@@ -1,5 +1,3 @@
 
 {% import "macros/images.html" as images -%}
-
-{{ images::responsive_image(path=page.path, src=src, default_size=config.extra.images_default_size, sizes=config.extra.images_sizes, alt=alt  ) }}
-
+{{ images::responsive_image(path=page.colocated_path, src=src, default_size=config.extra.images_default_size, sizes=config.extra.images_sizes, alt=alt, class=class | default(value="") ) }}
