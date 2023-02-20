@@ -12,12 +12,22 @@
     {%- block og_preview -%} 
     {{ social::og_preview() }}
     {%-endblock og_preview -%} 
-    {% block rss %}
+    {% block rss -%}
     <link rel="alternate"
           type="application/rss+xml"
           title="{{config.title}}"
-          href="{{ get_url(path='atom.xml',trailing_slash=false)|safe}}"> {%
-    endblock %}
+          href="{{ get_url(path='atom.xml',trailing_slash=false)|safe}}">
+    {% endblock rss -%}
+    {% if config.extra.google_analytics_tag_id -%}
+    <!-- Google Analytics tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.google_analytics_tag_id }}"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ config.extra.google_analytics_tag_id }}');
+    </script>
+    {% endif -%}
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
     <link rel="preconnect"
@@ -35,13 +45,13 @@
 
 <body>
     <header>
-        {% if config.extra.avatar %}
+        {% if config.extra.avatar -%}
 		<div class="avatar">
 			<a href="/">
                 {{ images::responsive_image(path="", src=config.extra.avatar, default_size=128, sizes=[64,128,256], alt=config.title  ) }}
 			</a>
 		</div>
-	    {% endif %}
+	    {% endif -%}
         <a class="site-name"
            href="/">
             <h1>{{ config.title }}</h1>
@@ -51,63 +61,63 @@
         </div>
         <nav>
             <div class="links"> 
-            {% for menu_link in config.extra.menu_links %}
-                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) %} 
+            {% for menu_link in config.extra.menu_links -%}
+                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%} 
                 <a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
                 href="{{ link_url | safe}} ">{{menu_link.name}}</a> 
-            {% endfor %} 
+            {% endfor -%} 
             </div>
         </nav>
     </header>
     <article>
-    {% block content %} 
-    {% endblock %}
+    {% block content -%} 
+    {% endblock -%}
     </article>
     <footer>
         <div class="social">
             <ul> 
                 {# Github #} 
-                {% if config.extra.link_github_username %}
+                {% if config.extra.link_github_username -%}
                 <li>
                     <a href="https://github.com/{{ config.extra.link_github_username }}"
                        title="Github" rel="me"><i data-feather="github"></i></a>
                 </li>
-                {% endif %} 
+                {% endif -%} 
 
                 {# Mastadon #} 
-                {% if config.extra.link_mastodon_url %}
+                {% if config.extra.link_mastodon_url -%}
                 <li>
                     <a href="{{ config.extra.link_mastodon_url }}"
                        title="Mastodon" rel="me"><i data-feather="message-square"></i></a>
                 </li> 
-                {% endif %} 
+                {% endif -%} 
 
                 {# Twitter #} 
-                {% if config.extra.link_twitter_username %}
+                {% if config.extra.link_twitter_username -%}
                 <li>
                     <a href="https://twitter.com/{{ config.extra.link_twitter_username }}"
                        title="Twitter"
                        rel="me"><i data-feather="twitter"></i></a>
                 </li>
-                {% endif %} 
+                {% endif -%} 
 
                 {# Instagram #}
-                {% if config.extra.link_instagram_username %}
+                {% if config.extra.link_instagram_username -%}
                 <li>
                     <a href="https://www.instagram.com/jimmyff_art/{{ config.extra.link_instagram_username }}"
                        title="Medium"
                        rel="me"><i data-feather="instagram"></i></a>
                 </li>
-                {% endif %} 
+                {% endif -%} 
 
                 {# Medium #}
-                {% if config.extra.link_medium_username %}
+                {% if config.extra.link_medium_username -%}
                 <li>
                     <a href="https://medium.com/@{{ config.extra.link_medium_username }}"
                        title="Medium"
                        rel="me"><i data-feather="file-text"></i></a>
                 </li>
-                {% endif %} 
+                {% endif -%} 
 
                 {# RSS feed #}
                 <li>

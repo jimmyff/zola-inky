@@ -38,6 +38,9 @@ anchors = "on"
 # Place your avatar in your /static folder
 avatar = "/inky.png"
 
+# Your Google Analytics measurement id ("G-XXXXXXXXXX")
+# google_analytics_tag_id = "";
+
 keywords = "zola, theme, ink, hugo-ink"
 
 search_enabled = false

@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 - Hooks names updated for consistency
 - Added class parameter for responsive images
 - Added `images::image()` macro and `image_original` shortcode for images that don't want resizing (eg: animated gifs)
+- Added Google Analytics to `config.toml` see: `config.extra.google_analytics_tag_id`
+- Fixes issues with unnecessary whitespace in templates
 
 ## [1.0]
 
