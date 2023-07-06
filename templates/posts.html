@@ -18,7 +18,7 @@
       <div class="matter">
         <div class="title small">
           <a href="{{ post.permalink | safe }}">{{ post.title }}</a>
-          {% if post.draft %}<span class="draft">Draft</span>{% endif %}
+          {% if post.draft %}<span class="draft">(Draft)</span>{% endif %}
         </div>
         {{ hooks::posts_below_title(page=post) }} 
       </div>
