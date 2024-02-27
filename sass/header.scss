@@ -33,6 +33,14 @@ header h1 {
   // line-height: 0.2rem;
 }
 
+footer {
+  color: var(--subtle-text);
+
+  a {
+    color: var(--subtle-links);
+  }
+}
+
 .social li,
 .social ul {
   margin: 0;
@@ -46,7 +54,7 @@ header h1 {
 }
 
 .social a {
-  color: #333;
+  color: var(--subtle-links);
 }
 
 .social a:hover {
