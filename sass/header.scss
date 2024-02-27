@@ -38,6 +38,10 @@ footer {
 
   a {
     color: var(--subtle-links);
+
+    &:hover {
+      color: var(--primary);
+    }
   }
 }
 
@@ -57,9 +61,6 @@ footer {
   color: var(--subtle-links);
 }
 
-.social a:hover {
-  color: var(--primary);
-}
 
 .social nav {
   margin: 0;
