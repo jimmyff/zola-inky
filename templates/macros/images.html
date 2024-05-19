@@ -16,7 +16,7 @@
 
 {% macro responsive_image(path, src, alt, default_size, sizes, class="") -%}
 {% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true -%}
-{{ image(path=path, src=src, alt=alt, class=class) -}}
+<img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=path ~ src) | safe }}" class="{{ class }}" />
 {% else -%}
     {% set abspath = path ~ src  -%}
     {% set meta = get_image_metadata(path=abspath) -%}
@@ -37,7 +37,8 @@
 
 {% macro responsive_thumbnail(path, src, alt, default_size, sizes, class="") -%}
 {% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true -%}
-{{ image(path=path, src=src, alt=alt, class=class) -}}
+<img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=path ~ src) | safe }}" class="{{ class }}" />
+
 {% else -%}
     {% set abspath = path ~ src  -%}
     {% set meta = get_image_metadata(path=abspath) -%}
