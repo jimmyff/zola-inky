@@ -45,6 +45,7 @@
 
 <body>
     <header>
+    <div class="top">
         {% if config.extra.avatar -%}
 		<div class="avatar">
 			<a href="/">
@@ -52,19 +53,22 @@
 			</a>
 		</div>
 	    {% endif -%}
-        <a class="site-name"
-           href="/">
-            <h1>{{ config.title }}</h1>
-        </a>
-        <div class="site-description">
-            <p>{{ config.description }}</p>
+        <div class="details">
+            <a class="site-name"
+            href="/">
+                <h1>{{ config.title }}</h1>
+            </a>
+            <div class="site-description">
+                <p>{{ config.description }}</p>
+            </div>
         </div>
+    </div>
         <nav>
             <div class="links"> 
             {% for menu_link in config.extra.menu_links -%}
                 {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%} 
                 <a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
-                href="{{ link_url | safe}} ">{{menu_link.name}}</a> 
+                href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a> 
             {% endfor -%} 
             </div>
         </nav>
@@ -82,6 +86,14 @@
                     <a href="https://github.com/{{ config.extra.link_github_username }}"
                        title="Github" rel="me"><i data-feather="github"></i></a>
                 </li>
+                {% endif -%} 
+
+                {# Bluesky #} 
+                {% if config.extra.link_bluesky_url -%}
+                <li>
+                    <a href="{{ config.extra.link_bluesky_url }}"
+                       title="Bluesky" rel="me"><i data-feather="message-square"></i></a>
+                </li> 
                 {% endif -%} 
 
                 {# Mastadon #} 

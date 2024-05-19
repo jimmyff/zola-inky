@@ -1,30 +1,71 @@
 header {
   margin: 2rem 0;
-}
 
-header .avatar {
-  float: left;
-  margin: 0 2rem 0 0;
-}
+  .top {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 2.5vw;
 
-header .links {
-  line-height: 2.2rem;
-}
 
-header .avatar img {
-  width: 4rem;
-  height: 4rem;
-  overflow: hidden;
-  border-radius: 100%;
-}
+    .avatar {
 
-header .site-description {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+      img {
+        width: 4rem;
+        height: 4rem;
+        overflow: hidden;
+        border-radius: 100%;
+      }
+    }
 
-  p {
-    margin: 0 0 1rem 0;
+    .details {
+
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .site-description {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+          margin: 0;
+        }
+
+
+      }
+    }
+
+  }
+
+
+  .links {
+    line-height: 2.2rem;
+
+    display: flex;
+
+    a {
+      text-decoration: none;
+      flex: 0;
+      padding: 0.25em;
+      display: flex;
+
+      &.active,
+      &:hover {
+        span.name {
+          text-decoration: underline;
+        }
+      }
+
+      span {
+        flex: 0;
+
+        &.emoji {
+          padding-right: 0.25em;
+        }
+      }
+    }
   }
 }
 
@@ -80,7 +121,7 @@ nav {
 }
 
 nav a {
-  margin-right: 1.5rem;
+  margin-right: 2vw;
 }
 
 @media (max-width: 900px) {
@@ -89,10 +130,23 @@ nav a {
   }
 
   nav a {
-    margin-right: 0.5rem;
+
+    margin-right: 1vw;
   }
 
   header {
     margin: 1rem 0;
+  }
+}
+
+@media (max-width: 500px) {
+
+  header {
+
+    .site-description p {
+      font-size: 0.8em;
+      ;
+    }
+
   }
 }

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 
+{% macro image_absolute(path, src, alt, class="") -%}
+<img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=src) | safe }}" class="{{ class }}" />
+{% endmacro image_absolute -%}
+
 {% macro image(path, src, alt, class="") -%}
 <img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=path ~ src) | safe }}" class="{{ class }}" />
 {% endmacro image -%}

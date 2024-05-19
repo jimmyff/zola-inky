@@ -1,3 +1,9 @@
 
 {% import "macros/images.html" as images -%}
-{{ images::responsive_image(path=page.colocated_path, src=src, default_size=config.extra.images_default_size, sizes=config.extra.images_sizes, alt=alt, class=class | default(value="") ) }}
+{% if path %}
+{% set image_path =  path %}
+{% else %}
+{% set image_path = page.colocated_path %}
+{% endif %}
+
+{{ images::responsive_image(path= image_path, src=src, default_size=config.extra.images_default_size, sizes=config.extra.images_sizes, alt=alt, class=class | default(value="") ) }}

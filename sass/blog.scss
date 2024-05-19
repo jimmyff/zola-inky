@@ -18,6 +18,12 @@
         width: 100%;
         max-width: 500px;
       }
+
+      &.full-width {
+        max-height: none;
+        max-width: 100%;
+      }
+
     }
   }
 }
@@ -53,7 +59,7 @@
 }
 
 .post .post-header {
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .post-header h1.title {
@@ -82,17 +88,33 @@
 
 .youtube {
 
+  max-height: 90vh;
   position: relative;
-  padding-bottom: 56.25%;
+  margin: 0 auto;
 
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  .inner {
+    position: relative;
+    padding-bottom: 56.25%;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &.portrait {
+    max-width: 40vh;
+
+    .inner {
+      padding-bottom: 177.77%;
+
+    }
   }
 }
+
 
 .draft {
   color: var(--red);
