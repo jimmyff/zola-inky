@@ -5,6 +5,7 @@ header {
     display: flex;
     gap: 1em;
     margin-bottom: 2.5vw;
+    align-items: center;
 
 
     .avatar {
@@ -14,6 +15,33 @@ header {
         height: 4rem;
         overflow: hidden;
         border-radius: 100%;
+      }
+    }
+
+    .right-button {
+
+      width: 4rem;
+      height: 4rem;
+
+      justify-content: center;
+      display: flex;
+      align-items: stretch;
+
+      a {
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+
+        font-size: 1.2em;
+        border: 1px solid var(--black);
+        border-radius: 50%;
+        text-decoration: none !important;
+
+        &.active {
+
+          border: 1px solid var(--light-grey);
+        }
       }
     }
 
@@ -31,6 +59,7 @@ header {
 
         p {
           margin: 0;
+          font-size: 0.9em;
         }
 
 
@@ -143,10 +172,42 @@ nav a {
 
   header {
 
-    .site-description p {
-      font-size: 0.8em;
-      ;
+    .top {
+
+      gap: 0.75em;
+
+      .details .site-description p {
+        font-size: 0.75em;
+        line-height: 1.3em;
+
+      }
+
+      .avatar img,
+      .right-button {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+
     }
 
   }
+}
+
+@media (min-width: 900px) {
+
+  header {
+
+    .top {
+      margin-bottom: 1em;
+
+      .avatar img,
+      .right-button {
+        font-size: 1.5em;
+        width: 5rem;
+        height: 5rem;
+      }
+    }
+
+  }
+
 }

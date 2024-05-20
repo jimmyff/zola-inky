@@ -62,6 +62,15 @@
                 <p>{{ config.description }}</p>
             </div>
         </div>
+        {% if config.extra.search_path -%}
+        {% set search_url = config.extra.search_path  | replace(from="$BASE_URL", to=config.base_url) -%}
+        
+		<div class="right-button">
+			<a href="{{ search_url }}" alt="Search" class="{% if current_url and current_url==search_url %}active{%  endif %}">
+                🔎
+			</a>
+		</div>
+	    {% endif -%}
     </div>
         <nav>
             <div class="links"> 
