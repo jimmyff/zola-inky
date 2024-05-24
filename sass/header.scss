@@ -20,8 +20,8 @@ header {
 
     .right-button {
 
-      width: 4rem;
-      height: 4rem;
+      width: 3rem;
+      height: 3rem;
 
       justify-content: center;
       display: flex;
@@ -33,10 +33,11 @@ header {
         align-items: center;
         display: flex;
 
-        font-size: 1.2em;
+        font-size: 1em;
         border: 1px solid var(--black);
         border-radius: 50%;
         text-decoration: none !important;
+
 
         &.active {
 
@@ -44,6 +45,8 @@ header {
         }
       }
     }
+
+
 
     .details {
 
@@ -73,12 +76,29 @@ header {
     line-height: 2.2rem;
 
     display: flex;
+    align-items: center;
+
+    a,
+    .overflow-menu {
+      text-decoration: none;
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+
+
+
+      span {
+        flex: 0;
+
+        &.emoji {
+          margin: 0 0.5em 0 0.25em;
+          font-size: 1.2em;
+        }
+      }
+    }
 
     a {
-      text-decoration: none;
-      flex: 0;
-      padding: 0.25em;
-      display: flex;
 
       &.active,
       &:hover {
@@ -86,15 +106,50 @@ header {
           text-decoration: underline;
         }
       }
+    }
 
-      span {
-        flex: 0;
+    .overflow-menu {
 
-        &.emoji {
-          padding-right: 0.25em;
+      flex: 0;
+
+      summary {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 2em;
+        padding: 0.5em 1em;
+
+        div {
+          height: 0.2em;
+          color: var(--primary);
+          line-height: 0.2em;
+
+          &::before {
+            content: "·";
+            font-size: 1.5em;
+          }
+        }
+
+        ul {
+          min-width: 12em;
+        }
+
+      }
+
+      &[open] {
+        summary div {
+          color: var(--heading-color);
         }
       }
+
+      ul {
+        top: 3em;
+      }
+
     }
+
   }
 }
 
@@ -146,21 +201,13 @@ footer {
 
 nav {
   border-top: 1px solid var(--light-grey);
-  padding-top: 1rem;
+  padding-top: 0.75rem;
 }
 
-nav a {
-  margin-right: 2vw;
-}
 
 @media (max-width: 900px) {
   .social li {
     margin: 0;
-  }
-
-  nav a {
-
-    margin-right: 1vw;
   }
 
   header {
@@ -182,16 +229,18 @@ nav a {
 
       }
 
-      .avatar img,
-      .right-button {
+      .avatar img {
         width: 3.5rem;
         height: 3.5rem;
       }
+
 
     }
 
   }
 }
+
+
 
 @media (min-width: 900px) {
 
@@ -200,9 +249,7 @@ nav a {
     .top {
       margin-bottom: 1em;
 
-      .avatar img,
-      .right-button {
-        font-size: 1.5em;
+      .avatar img {
         width: 5rem;
         height: 5rem;
       }

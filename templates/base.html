@@ -33,6 +33,11 @@
     <link rel="preconnect"
           href="https://fonts.gstatic.com"
           crossorigin>
+
+{% if config.extra.overflow_menu_links -%}   
+    <script src="/js/drop.js"></script>
+{% endif -%}
+
     <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">  -->
     <link href="https://fonts.googleapis.com/css2?family=Andada+Pro&display=swap&family=Playfair+Display"
           rel="stylesheet">
@@ -62,15 +67,15 @@
                 <p>{{ config.description }}</p>
             </div>
         </div>
+    
         {% if config.extra.search_path -%}
         {% set search_url = config.extra.search_path  | replace(from="$BASE_URL", to=config.base_url) -%}
-        
-		<div class="right-button">
-			<a href="{{ search_url }}" alt="Search" class="{% if current_url and current_url==search_url %}active{%  endif %}">
+        <div class="right-button">
+            <a href="{{ search_url }}" alt="Search" class="{% if current_url and current_url==search_url %}active{%  endif %}">
                 🔎
-			</a>
-		</div>
-	    {% endif -%}
+            </a>
+        </div>
+        {% endif -%}
     </div>
         <nav>
             <div class="links"> 
@@ -79,7 +84,27 @@
                 <a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
                 href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a> 
             {% endfor -%} 
-            </div>
+
+            {% if config.extra.overflow_menu_links -%}
+
+            <details class="overflow-menu dropdown dropdown-right" alt="Menu">
+                <summary>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </summary>
+                <ul>
+                {% for menu_link in config.extra.overflow_menu_links -%}
+                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%} 
+                    <li><a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
+                    href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a></li>
+                {% endfor -%} 
+                </ul>
+            </details>
+            
+            {% endif -%}
+        </div>
+
         </nav>
     </header>
     <article>

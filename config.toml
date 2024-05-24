@@ -45,7 +45,6 @@ keywords = "zola, theme, ink, hugo-ink"
 
 search_enabled = false
 
-
 image_resizing_disabled = false
 image_format = "auto"           # "auto", "jpg", "png", "webp"
 
