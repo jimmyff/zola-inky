@@ -75,6 +75,8 @@ pre,
 code {
   font-family: var(--font-monospace);
   text-rendering: optimizeLegibility;
+  white-space: pre;
+  font-size: 14px;
 }
 
 @media (max-width: 700px) {

@@ -61,6 +61,10 @@ hr {
   height: 1px;
   margin: 2rem 0;
   background: var(--light-grey);
+
+  &.subtle {
+    background: var(--black);
+  }
 }
 
 pre,

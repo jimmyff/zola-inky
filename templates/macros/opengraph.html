@@ -1,5 +1,6 @@
 {% macro og_preview() %}
-<title>{{config.title}} | {{social::og_title() }}</title>
+<title>
+  {{social::og_title() }} // {{ config.title }}{% if config.extra.title_suffix %} // {{ config.extra.title_suffix }}{% endif -%}</title>
 <meta
   property="og:title"
   content="{{config.title}} | {{social::og_title() }}"
@@ -25,6 +26,8 @@ page.description -%} {{ page.description }} {%- else -%} {{ config.description
 }} {%- endif -%} {%- endif -%}
 {% endmacro og_description %}
 
+
+
 {% macro og_title() %}
 {%- if section -%}
 {%- if section.title -%}
@@ -36,6 +39,14 @@ page.description -%} {{ page.description }} {%- else -%} {{ config.description
 {%- else -%}
 {{ config.description }}
 {%- endif -%}
+
+{%- elif taxonomy -%}
+{%- if taxonomy.name -%}
+{{ taxonomy.name | striptags }}
+{%- else -%}
+{{ config.description }}
+{%- endif -%}
+
 {%- elif term -%}
   {%- if term.name -%}
     {{ term.name | striptags }}
@@ -43,7 +54,10 @@ page.description -%} {{ page.description }} {%- else -%} {{ config.description
     {{ config.description }}
   {%- endif -%}
 {%- elif taxonomy -%}
-{%- if taxonomy.name -%} {{ taxonomy.name | striptags }} {%- else -%} {{ config.description }} {%- endif -%} {%- endif -%}
+{%- if taxonomy.name -%}
+{{ taxonomy.name | striptags }}
+{%- else -%}{{ config.description }}{%- endif -%}
+{%- endif -%}
 {% endmacro og_title %}
 
 {% macro og_image() %}
