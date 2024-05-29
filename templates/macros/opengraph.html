@@ -8,13 +8,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ current_url | safe }}" />
 <meta property="og:description" content="{{ social::og_description() }}" />
-<meta property="og:image" content="{{social::og_image() }}" />
-<meta property="og:image:url" content="{{social::og_image() }}" />
-<meta property="og:image:secure_url" content="{{social::og_image() }}" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="{{social::og_title() }}" />
-<meta name="twitter:description" content="{{ social::og_description() }}" />
-<meta property="twitter:image" content="{{social::og_image() }}" />
+{{hooks::og_image_tags() }}
 
 {% endmacro og_preview %}
 
@@ -59,9 +53,3 @@ page.description -%} {{ page.description }} {%- else -%} {{ config.description
 {%- else -%}{{ config.description }}{%- endif -%}
 {%- endif -%}
 {% endmacro og_title %}
-
-{% macro og_image() %}
-{%- if page.extra.og_preview_img -%}
-{{ get_url(path=page.extra.og_preview_img) | safe }}
-{%- endif -%}
-{% endmacro og_image %}

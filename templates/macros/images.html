@@ -38,6 +38,25 @@
 {% endmacro responsive_image -%}
 
 
+{% macro responsive_image_url(path, src, width, height, op="fill") -%}
+{% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true -%}
+{# ZOLA BUG? Can't use get_url doesn't work here... as this fails for some reason... #}
+{# <img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path="/content" ~ src) | safe }}" class="{{ class }}" />
+ #}
+/inky.png
+{% else -%}
+    {% set abspath = path ~ src  -%}
+    {% set meta = get_image_metadata(path=abspath) -%}
+    {% set current_width = meta.width -%}
+    
+    {# {% if current_width >= width -%} #}
+    {% set resized = resize_image(format=config.extra.image_format, path=abspath, width=width, height=height, op=op, quality=config.extra.image_quality) -%}
+    {{ resized.url | safe }}
+    {# {% endif -%} #}
+{% endif -%}
+{% endmacro responsive_image_url -%}
+
+
 {% macro responsive_thumbnail(path, src, alt, default_size, sizes, class="") -%}
 {% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true -%}
 {# <img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=path ~ src) | safe }}" class="{{ class }}" /> #}
