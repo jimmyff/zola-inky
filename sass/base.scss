@@ -101,6 +101,35 @@ textarea {
   color: var(--text-color);
 }
 
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 20px;
+  text-align: center;
+}
+
+thead tr {
+  background-color: var(--light-grey);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--lighter-gray);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--white);
+}
+
+table {
+  background-color: var(--lighter-grey);
+}
+
+
+
 
 @media (max-width: 900px) {
   body {
