@@ -124,6 +124,14 @@
                 </li>
                 {% endif -%} 
 
+                {# Youtube #} 
+                {% if config.extra.link_youtube_handle -%}
+                <li>
+                    <a href="https://www.youtube.com/@{{ config.extra.link_youtube_handle }}"
+                       title="YouTube" rel="me"><i data-feather="youtube"></i></a>
+                </li>
+                {% endif -%} 
+
                 {# Bluesky #} 
                 {% if config.extra.link_bluesky_url -%}
                 <li>
