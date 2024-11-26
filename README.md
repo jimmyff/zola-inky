@@ -40,6 +40,32 @@ Using the responsive images will make sure your images are generated at various 
 {{ image(src="yourimage.jpg", alt="This is my image") }}
 ```
 
+## Override footer content
+
+You can override the content of the footer by overriding `base.html`.
+There are three blocks available:
+
+- `footer_left`: contains social and RSS buttons by default
+- `footer_center`: empty by default
+- `footer_right`: contains attributions by default (please keep the link to the original theme author)
+
+Here is an example that you can put in `templates/base.html` in your website:
+
+```html
+{% extends "zola-inky/templates/base.html" %}
+
+{% block footer_center %}
+<a target="_blank" href="https://example.com/">Hosted by example.com</a>
+{% endblock footer_center %}
+
+{% block footer_right %}
+Licence: CC-BY-SA {{ config.title }} {{ now() | date(format="%Y") }}
+<br>
+Powered by <a target="_blank" href="https://getzola.org/">Zola</a>.
+Theme: <a target="_blank" href="https://github.com/jimmyff/zola-inky">Inky</a>.
+{% endblock footer_right %}
+```
+
 ## Feature requests & support
 
 I'm afraid I'm unable to accept feature requests or provide user support for this theme. The [Zola documentation](https://www.getzola.org/documentation/getting-started/overview/) and [Tera documentation](https://tera.netlify.app/docs/) are great resources and there is a [Zola discussion forum](https://zola.discourse.group/). If you've found a bug in the themse please open a github issue.

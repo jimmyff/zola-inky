@@ -114,6 +114,7 @@
     {% endblock -%}
     </article>
     <footer>
+        {% block footer_left -%}
         <div class="social">
             <ul> 
                 {# Github #} 
@@ -181,13 +182,20 @@
                        title="{{config.title}}"><i data-feather="rss"></i></a>
                 </li>
             </ul>
+        {% endblock footer_left -%}
         </div>
-        <p> © {{ config.title }} {{ now() | date(format="%Y") }}
-
+        <p>
+        {% block footer_center -%}
+        {% endblock footer_center -%}
+        </p>
+        <p>
+        {% block footer_right -%}
+        © {{ config.title }} {{ now() | date(format="%Y") }}
         {#  If you remove the powered by information, it would be appreciated if 
             you could add information & links somewhere else on your site to credit 
             those that have created your tools. #}
         {% if config.extra.disable_powered_by and config.extra.disable_powered_by == true %}{% else %}<br>Powered by <a target="_blank" href="https://getzola.org/">Zola</a>. Theme: <a target="_blank" href="https://github.com/jimmyff/zola-inky">Inky</a>.{% endif %}
+        {% endblock footer_right -%}
         </p>
     </footer>
     <script>
