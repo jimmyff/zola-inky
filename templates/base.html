@@ -7,19 +7,20 @@
 
 <!DOCTYPE html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
-<head> 
+<head>
     {%- block general_meta -%}
     {{ head::general_meta() }}
     {%- endblock general_meta -%}
-    {%- block og_preview -%} 
+    {%- block og_preview -%}
     {{ social::og_preview() }}
-    {%-endblock og_preview -%} 
+    {%-endblock og_preview -%}
     {% block rss -%}
     <link rel="alternate"
           type="application/rss+xml"
           title="{{config.title}}"
           href="{{ get_url(path='atom.xml',trailing_slash=false)|safe}}">
     {% endblock rss -%}
+    <link rel="icon" type="image/png" href="{{ get_url(path='favicon.jpg') }}">
     {% if config.extra.google_analytics_tag_id -%}
     <!-- Google Analytics tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.google_analytics_tag_id }}"></script>
@@ -36,7 +37,7 @@
           href="https://fonts.gstatic.com"
           crossorigin>
 
-{% if config.extra.overflow_menu_links -%}   
+{% if config.extra.overflow_menu_links -%}
     <script src="/js/drop.js"></script>
 {% endif -%}
 
@@ -69,7 +70,7 @@
                 <p>{{ config.description }}</p>
             </div>
         </div>
-    
+
         {% if config.extra.search_path -%}
         {% set search_url = config.extra.search_path  | replace(from="$BASE_URL", to=config.base_url) -%}
         <div class="right-button">
@@ -80,12 +81,12 @@
         {% endif -%}
     </div>
         <nav>
-            <div class="links"> 
+            <div class="links">
             {% for menu_link in config.extra.menu_links -%}
-                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%} 
+                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%}
                 <a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
-                href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a> 
-            {% endfor -%} 
+                href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a>
+            {% endfor -%}
 
             {% if config.extra.overflow_menu_links -%}
 
@@ -97,74 +98,74 @@
                 </summary>
                 <ul>
                 {% for menu_link in config.extra.overflow_menu_links -%}
-                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%} 
+                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%}
                     <li><a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
                     href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a></li>
-                {% endfor -%} 
+                {% endfor -%}
                 </ul>
             </details>
-            
+
             {% endif -%}
         </div>
 
         </nav>
     </header>
     <article>
-    {% block content -%} 
+    {% block content -%}
     {% endblock -%}
     </article>
     <footer>
         <div class="social">
-            <ul> 
-                {# Github #} 
+            <ul>
+                {# Github #}
                 {% if config.extra.link_github_username -%}
                 <li>
                     <a href="https://github.com/{{ config.extra.link_github_username }}"
                        title="Github" rel="me"><i data-feather="github"></i></a>
                 </li>
-                {% endif -%} 
+                {% endif -%}
 
-                {# Youtube #} 
+                {# Youtube #}
                 {% if config.extra.link_youtube_handle -%}
                 <li>
                     <a href="https://www.youtube.com/@{{ config.extra.link_youtube_handle }}"
                        title="YouTube" rel="me"><i data-feather="youtube"></i></a>
                 </li>
-                {% endif -%} 
+                {% endif -%}
 
-                {# Bluesky #} 
+                {# Bluesky #}
                 {% if config.extra.link_bluesky_url -%}
                 <li>
                     <a href="{{ config.extra.link_bluesky_url }}"
                        title="Bluesky" rel="me"><i data-feather="message-square"></i></a>
-                </li> 
-                {% endif -%} 
+                </li>
+                {% endif -%}
 
-                {# Mastadon #} 
+                {# Mastadon #}
                 {% if config.extra.link_mastodon_url -%}
                 <li>
                     <a href="{{ config.extra.link_mastodon_url }}"
                        title="Mastodon" rel="me"><i data-feather="message-square"></i></a>
-                </li> 
-                {% endif -%} 
+                </li>
+                {% endif -%}
 
-                {# Twitter #} 
+                {# Twitter #}
                 {% if config.extra.link_twitter_username -%}
                 <li>
                     <a href="https://twitter.com/{{ config.extra.link_twitter_username }}"
                        title="Twitter"
                        rel="me"><i data-feather="twitter"></i></a>
                 </li>
-                {% endif -%} 
+                {% endif -%}
 
                 {# Instagram #}
                 {% if config.extra.link_instagram_username -%}
                 <li>
-                    <a href="https://www.instagram.com/jimmyff_art/{{ config.extra.link_instagram_username }}"
+                    <a href="https://www.instagram.com/{{ config.extra.link_instagram_username }}"
                        title="Medium"
                        rel="me"><i data-feather="instagram"></i></a>
                 </li>
-                {% endif -%} 
+                {% endif -%}
 
                 {# Medium #}
                 {% if config.extra.link_medium_username -%}
@@ -173,7 +174,7 @@
                        title="Medium"
                        rel="me"><i data-feather="file-text"></i></a>
                 </li>
-                {% endif -%} 
+                {% endif -%}
 
                 {# RSS feed #}
                 <li>
@@ -184,16 +185,16 @@
         </div>
         <p> © {{ config.title }} {{ now() | date(format="%Y") }}
 
-        {#  If you remove the powered by information, it would be appreciated if 
-            you could add information & links somewhere else on your site to credit 
+        {#  If you remove the powered by information, it would be appreciated if
+            you could add information & links somewhere else on your site to credit
             those that have created your tools. #}
         {% if config.extra.disable_powered_by and config.extra.disable_powered_by == true %}{% else %}<br>Powered by <a target="_blank" href="https://getzola.org/">Zola</a>. Theme: <a target="_blank" href="https://github.com/jimmyff/zola-inky">Inky</a>.{% endif %}
         </p>
     </footer>
     <script>
         feather.replace();
-    </script> 
-    {% block body_end -%} 
+    </script>
+    {% block body_end -%}
     {% endblock body_end -%}
 </body>
 </html>

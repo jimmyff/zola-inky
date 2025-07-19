@@ -145,3 +145,21 @@ textarea {
     font-size: 1rem;
   }
 }
+
+/* Utilities for column layout in Markdown content */
+.columns {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.column {
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Optional: Tighter columns for narrower content */
+.columns.tight {
+  gap: 1rem;
+}
