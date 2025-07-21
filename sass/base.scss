@@ -159,7 +159,10 @@ textarea {
   min-width: 250px;
 }
 
-/* Optional: Tighter columns for narrower content */
 .columns.tight {
   gap: 1rem;
+}
+/* Single line breaks behave not like degens anymore */
+p {
+    white-space: pre-line;
 }
