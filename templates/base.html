@@ -46,8 +46,7 @@
           rel="stylesheet">
     <link rel="stylesheet"
           href="{{ get_url(path='base.css',trailing_slash=false)|safe}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
-            integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
             crossorigin="anonymous"></script>
 </head>
 
@@ -121,7 +120,7 @@
                 {% if config.extra.link_github_username -%}
                 <li>
                     <a href="https://github.com/{{ config.extra.link_github_username }}"
-                       title="Github" rel="me"><i data-feather="github"></i></a>
+                       title="Github" rel="me"><i data-lucide="github"></i></a>
                 </li>
                 {% endif -%}
 
@@ -129,7 +128,7 @@
                 {% if config.extra.link_youtube_handle -%}
                 <li>
                     <a href="https://www.youtube.com/@{{ config.extra.link_youtube_handle }}"
-                       title="YouTube" rel="me"><i data-feather="youtube"></i></a>
+                       title="YouTube" rel="me"><i data-lucide="youtube"></i></a>
                 </li>
                 {% endif -%}
 
@@ -137,7 +136,7 @@
                 {% if config.extra.link_bluesky_url -%}
                 <li>
                     <a href="{{ config.extra.link_bluesky_url }}"
-                       title="Bluesky" rel="me"><i data-feather="message-square"></i></a>
+                       title="Bluesky" rel="me"><i data-lucide="message-square"></i></a>
                 </li>
                 {% endif -%}
 
@@ -145,7 +144,7 @@
                 {% if config.extra.link_mastodon_url -%}
                 <li>
                     <a href="{{ config.extra.link_mastodon_url }}"
-                       title="Mastodon" rel="me"><i data-feather="message-square"></i></a>
+                       title="Mastodon" rel="me"><i data-lucide="message-square"></i></a>
                 </li>
                 {% endif -%}
 
@@ -154,7 +153,7 @@
                 <li>
                     <a href="https://twitter.com/{{ config.extra.link_twitter_username }}"
                        title="Twitter"
-                       rel="me"><i data-feather="twitter"></i></a>
+                       rel="me"><i data-lucide="twitter"></i></a>
                 </li>
                 {% endif -%}
 
@@ -163,23 +162,34 @@
                 <li>
                     <a href="https://www.instagram.com/{{ config.extra.link_instagram_username }}"
                        title="Medium"
-                       rel="me"><i data-feather="instagram"></i></a>
+                       rel="me"><i data-lucide="instagram"></i></a>
                 </li>
                 {% endif -%}
-
+                {# Tiktok #}
+                {% if config.extra.link_tiktok_username -%}
+                <li>
+                  <a href="https://www.tiktok.com/@{{ config.extra.link_tiktok_username }}"
+                     title="TikTok"
+                     rel="me">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                    </svg>
+                  </a>
+                </li>
+                {% endif -%}
                 {# Medium #}
                 {% if config.extra.link_medium_username -%}
                 <li>
                     <a href="https://medium.com/@{{ config.extra.link_medium_username }}"
                        title="Medium"
-                       rel="me"><i data-feather="file-text"></i></a>
+                       rel="me"><i data-lucide="file-text"></i></a>
                 </li>
                 {% endif -%}
 
                 {# RSS feed #}
                 <li>
                     <a href="{{ get_url(path='atom.xml',trailing_slash=false)|safe }}"
-                       title="{{config.title}}"><i data-feather="rss"></i></a>
+                       title="{{config.title}}"><i data-lucide="rss"></i></a>
                 </li>
             </ul>
         </div>
@@ -192,7 +202,7 @@
         </p>
     </footer>
     <script>
-        feather.replace();
+        lucide.createIcons();
     </script>
     {% block body_end -%}
     {% endblock body_end -%}
