@@ -1,0 +1,7 @@
+<div class="columns">
+  {% for col in body | split(pat="<!-- column -->") %}
+    <div class="column">
+      {{ col | markdown(inline=false) | safe }}
+    </div>
+  {% endfor %}
+</div>

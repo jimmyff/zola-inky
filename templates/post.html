@@ -1,7 +1,5 @@
-
 {% extends "base.html" %}
 {% block content %}
-
 <section class="post">
   <div class="post-header">
     <div class="meta">
@@ -10,16 +8,31 @@
         <span class="rest">{{ page.date | date(format='%b %y')}}</span>
       </div>
     </div>
-
     <div class="matter">
       <h1 class="title">{{ page.title }} {% if page.draft %}<span class="draft">Draft</span>{% endif %}</h1>
     </div>
   </div>
-  {{ hooks::post_above_content(page=page) }}  
+  {{ hooks::post_above_content(page=page) }}
   <article>{{ page.content | safe }}</article>
 
-  
-  {{ hooks::post_below_content(page=page) }}  
+  {{ hooks::post_below_content(page=page) }}
+
+  <!-- Disqus Comments -->
+  <div id="disqus_thread"></div>
+  <script>
+      var disqus_config = function () {
+      this.page.url = "{{ page.permalink | safe }}";
+      this.page.identifier = "{{ page.relative_path | safe }}";
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypnose-auragan-fr.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
   {% if page.taxonomies is containing ("tags") %}
   <ul class="tags">
     {% for tag in page.taxonomies["tags"] %}
@@ -27,7 +40,7 @@
     {% endfor %}
   </ul>
   {% endif %}
-  
-  {{ hooks::post_below_tags(page=page) }}  
+
+  {{ hooks::post_below_tags(page=page) }}
 </section>
 {% endblock content %}
