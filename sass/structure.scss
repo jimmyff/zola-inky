@@ -1,21 +1,3 @@
-/*Resets*/
-@use "normalize";
-
-/*Site Wide Components*/
-@use "variables";
-@use "utilities";
-@use "typography";
-@use "structure";
-@use "header";
-@use "footer";
-@use "search";
-
-/* Page Specific Components*/
-@use "blog";
-@use "gallery";
-@use "tags";
-@use "dropdown";
-@use "custom";
 
 body {
   font-family: var(--font-base);
@@ -102,3 +84,47 @@ textarea {
   color: var(--text-color);
 }
 
+
+@media (max-width: 900px) {
+  body {
+    padding: 0 2rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+}
