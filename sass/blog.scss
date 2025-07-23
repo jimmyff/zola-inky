@@ -41,12 +41,12 @@
 }
 
 .post-header .meta .date .day {
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
+  font-family: var(--font-headings);
+  font-weight: 200;
   line-height: 0.75em;
-  font-size: 2em;
+  font-size: 1.8em;
   display: block;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.2rem 0;
 }
 
 .post-header .meta .date .rest {
