@@ -1,5 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title }}",
+  "description": "{{ page.description | safe }}",
+  "author": {
+    "@type": "Person",
+    "name": "Your Name"
+  },
+  "datePublished": "{{ page.date | date(format="%Y-%m-%d") }}",
+  "dateModified": "{{ page.updated | date(format="%Y-%m-%d") }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.permalink }}"
+  }
+}
+</script>
 <section class="post">
   <div class="post-header">
     <div class="meta">
