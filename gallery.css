@@ -1,0 +1,1 @@
+.gallery{margin:0;padding:0}.thumbnail{display:inline-block;width:10rem;width:20%}.thumbnail a{display:inline-block;padding:.5rem}.thumbnail a img{margin:0;border-radius:var(--border-radius)}@media (max-width: 48rem){.thumbnail{width:25%}}@media (max-width: 36rem){.thumbnail{width:33.3333333333%}}@media (max-width: 24rem){.thumbnail{width:50%}.thumbnail a{padding:.25rem}}
