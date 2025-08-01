@@ -20,31 +20,10 @@
           title="{{config.title}}"
           href="{{ get_url(path='atom.xml',trailing_slash=false)|safe}}">
     {% endblock rss -%}
-    {% if config.extra.google_analytics_tag_id -%}
-    <!-- Google Analytics tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.google_analytics_tag_id }}"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '{{ config.extra.google_analytics_tag_id }}');
-    </script>
-    {% endif -%}
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-{% if config.extra.overflow_menu_links -%}   
-    <script src="/js/drop.js"></script>
-{% endif -%}
 
     <link rel="stylesheet"
           href="{{ get_url(path='base.css',trailing_slash=false)|safe}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
-            integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
-            crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -192,5 +171,22 @@
     </script> 
     {% block body_end -%} 
     {% endblock body_end -%}
+    {% if config.extra.google_analytics_tag_id -%}
+    <!-- Google Analytics tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.google_analytics_tag_id }}"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ config.extra.google_analytics_tag_id }}');
+    </script>
+    {% endif -%}
+
+{% if config.extra.overflow_menu_links -%}   
+    <script async src="/js/drop.js"></script>
+{% endif -%}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+            integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g=="
+            crossorigin="anonymous" async></script>
 </body>
 </html>
