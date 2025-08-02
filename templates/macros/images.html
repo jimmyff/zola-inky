@@ -6,11 +6,12 @@
 {% endmacro image_absolute -%}
 
 {% macro image(path, src, alt, class="") -%}
+{% set class_combined = class ~ " img-shadow" %}
 <img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=path ~ src) | safe }}" class="{{ class }}" />
 {% endmacro image -%}
 
-{# 
-    Original author: crepererum https://github.com/getzola/even/pull/48/files 
+{#
+    Original author: crepererum https://github.com/getzola/even/pull/48/files
     Adapted to Inky template by jimmyff
 #}
 
@@ -48,7 +49,7 @@
     {% set abspath = path ~ src  -%}
     {% set meta = get_image_metadata(path=abspath) -%}
     {% set current_width = meta.width -%}
-    
+
     {# {% if current_width >= width -%} #}
     {% set resized = resize_image(format=config.extra.image_format, path=abspath, width=width, height=height, op=op, quality=config.extra.image_quality) -%}
     {{ resized.url | safe }}

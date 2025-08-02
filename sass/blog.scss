@@ -87,9 +87,9 @@
 }
 
 .youtube {
-
   max-height: 90vh;
   position: relative;
+  outline: 2px solid var(--dark-grey);
   margin: 0 auto;
 
   .inner {

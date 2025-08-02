@@ -1,1 +1,13 @@
 // Override this scss file in your own sass folder to add your own styling
+
+.img-shadow {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem; /* Optional: soft rounding */
+}
+
+img {
+  border-radius: 0.75rem;
+  max-width: 100%;
+  height: auto;
+  outline: 4px solid var(--dark-grey);
+}
