@@ -1,0 +1,67 @@
+
+{%- set video_id = id | default(value="") -%}
+{%- if video_id == "" -%}
+  <!-- twitch_vod shortcode error: id is required -->
+{%- endif -%}
+
+{%- set autoplay = autoplay | default(value=false) -%}
+{%- set mute = mute | default(value=false) -%}
+{%- set time = time | default(value="") -%}
+
+{# Convert booleans to strings #}
+{%- set autoplay_s = autoplay | as_str -%}
+{%- set muted_s = mute | as_str -%}
+
+{# Build query params #}
+{%- set query = "video=" ~ video_id -%}
+{%- set query = query ~ "&autoplay=" ~ autoplay_s -%}
+{%- set query = query ~ "&muted=" ~ muted_s -%}
+{%- if time != "" -%}
+  {%- set query = query ~ "&time=" ~ time -%}
+{%- endif -%}
+
+{# Collect parent domains from config + shortcode args #}
+{%- set parent_params = "" -%}
+
+{# 1) from config.extra.twitch_parents (array) #}
+{%- set parents_cfg = config.extra.twitch_parents | default(value=[]) -%}
+{%- if parents_cfg | length > 0 -%}
+  {%- for p in parents_cfg -%}
+    {%- set parent_params = parent_params ~ "&parent=" ~ p -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{# 2) from shortcode: parent="example.com" #}
+{%- set parent_one = parent | default(value="") -%}
+{%- if parent_one != "" -%}
+  {%- set parent_params = parent_params ~ "&parent=" ~ parent_one -%}
+{%- endif -%}
+
+{# 3) from shortcode: parents="a.com,b.com,www.a.com" (CSV) #}
+{%- set parents_csv = parents | default(value="") -%}
+{%- if parents_csv != "" -%}
+  {%- for p in parents_csv | split(pat=",") -%}
+    {%- set p2 = p | trim -%}
+    {%- if p2 != "" -%}
+      {%- set parent_params = parent_params ~ "&parent=" ~ p2 -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{# 4) final fallback for local dev: localhost #}
+{%- if parent_params == "" -%}
+  {%- set parent_params = "&parent=localhost" -%}
+{%- endif -%}
+
+{%- set src = "https://player.twitch.tv/?" ~ query ~ parent_params -%}
+
+<div class="twitch-embed" style="position:relative;padding-top:56.25%;height:0;overflow:hidden;">
+  <iframe
+    src="{{ src }}"
+    allow="autoplay; fullscreen"
+    allowfullscreen
+    scrolling="no"
+    frameborder="0"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+  </iframe>
+</div>
