@@ -56,6 +56,7 @@
 {%- set src = "https://player.twitch.tv/?" ~ query ~ parent_params -%}
 
 <div class="twitch-embed" style="position:relative;padding-top:56.25%;height:0;overflow:hidden;">
+  <!-- parents from config: {{ (config.extra.twitch_parents | default(value=[])) | join(sep=", ") }} -->
   <iframe
     src="{{ src }}"
     allow="autoplay; fullscreen"
