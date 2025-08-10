@@ -20,21 +20,20 @@
   {%- set query = query ~ "&time=" ~ time -%}
 {%- endif -%}
 
+
 {# Collect parent domains from config + shortcode args #}
 {%- set parent_params = "" -%}
 
 {# 1) from config.extra.twitch_parents (array) #}
 {%- set parents_cfg = config.extra.twitch_parents | default(value=[]) -%}
-{%- if parents_cfg | length > 0 -%}
-  {%- for p in parents_cfg -%}
-    {%- set parent_params = parent_params ~ "&parent=" ~ p -%}
-  {%- endfor -%}
-{%- endif -%}
+{%- for p in parents_cfg -%}
+  {%- set_global parent_params = parent_params ~ "&parent=" ~ p -%}
+{%- endfor -%}
 
 {# 2) from shortcode: parent="example.com" #}
 {%- set parent_one = parent | default(value="") -%}
 {%- if parent_one != "" -%}
-  {%- set parent_params = parent_params ~ "&parent=" ~ parent_one -%}
+  {%- set_global parent_params = parent_params ~ "&parent=" ~ parent_one -%}
 {%- endif -%}
 
 {# 3) from shortcode: parents="a.com,b.com,www.a.com" (CSV) #}
@@ -43,13 +42,13 @@
   {%- for p in parents_csv | split(pat=",") -%}
     {%- set p2 = p | trim -%}
     {%- if p2 != "" -%}
-      {%- set parent_params = parent_params ~ "&parent=" ~ p2 -%}
+      {%- set_global parent_params = parent_params ~ "&parent=" ~ p2 -%}
     {%- endif -%}
   {%- endfor -%}
 {%- endif -%}
 
 {# 4) final fallback for local dev: localhost #}
-{%- if parent_params == "" -%}
+{%- if parent_params | trim == "" -%}
   {%- set parent_params = "&parent=localhost" -%}
 {%- endif -%}
 
