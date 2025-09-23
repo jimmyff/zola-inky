@@ -7,7 +7,8 @@
 
 <!DOCTYPE html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
-<head>
+
+  <head>
     {%- block general_meta -%}
     {{ head::general_meta() }}
     {%- endblock general_meta -%}
@@ -21,190 +22,214 @@
           href="{{ get_url(path='atom.xml',trailing_slash=false)|safe}}">
     {% endblock rss -%}
     <link rel="icon" type="image/png" href="{{ get_url(path='favicon.jpg') }}">
+
     {% if config.extra.google_analytics_tag_id -%}
     <!-- Google Analytics tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.google_analytics_tag_id }}"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '{{ config.extra.google_analytics_tag_id }}');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ config.extra.google_analytics_tag_id }}');
     </script>
     {% endif -%}
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
 
-{% if config.extra.overflow_menu_links -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {% if config.extra.overflow_menu_links -%}
     <script src="/js/drop.js"></script>
-{% endif -%}
+    {% endif -%}
 
     <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">  -->
-    <link href="https://fonts.googleapis.com/css2?family=Andada+Pro&display=swap&family=Playfair+Display"
-          rel="stylesheet">
-    <link rel="stylesheet"
-          href="{{ get_url(path='base.css',trailing_slash=false)|safe}}">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
-            crossorigin="anonymous"></script>
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Andada+Pro&display=swap&family=Playfair+Display" rel="stylesheet">
 
-<body>
+    <!-- Base site CSS -->
+    <link rel="stylesheet" href="{{ get_url(path='base.css',trailing_slash=false)|safe}}">
+
+    {# Page/Section-level extra CSS (after base.css so they can override) #}
+    {% if page and page.extra.css %}
+    {% for href in page.extra.css %}
+    <link rel="stylesheet" href="{{ href | safe }}">
+    {% endfor %}
+    {% endif %}
+    {% if section and section.extra.css %}
+    {% for href in section.extra.css %}
+    <link rel="stylesheet" href="{{ href | safe }}">
+    {% endfor %}
+    {% endif %}
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" crossorigin="anonymous"></script>
+
+    {# Page/Section-level extra JS #}
+    {% if page and page.extra.js %}
+    {% for src in page.extra.js %}
+    <script src="{{ src | safe }}" defer></script>
+    {% endfor %}
+    {% endif %}
+    {% if section and section.extra.js %}
+    {% for src in section.extra.js %}
+    <script src="{{ src | safe }}" defer></script>
+    {% endfor %}
+    {% endif %}
+  </head>
+
+
+  <body>
     <header>
-    <div class="top">
+      <div class="top">
         {% if config.extra.avatar -%}
-		<div class="avatar">
-			<a href="/">
-                {{ images::responsive_image(path="", src=config.extra.avatar, default_size=128, sizes=[64,128,256], alt=config.title  ) }}
-			</a>
-		</div>
-	    {% endif -%}
+        <div class="avatar">
+          <a href="/">
+            {{ images::responsive_image(path="", src=config.extra.avatar, default_size=128, sizes=[64,128,256], alt=config.title  ) }}
+          </a>
+        </div>
+        {% endif -%}
         <div class="details">
-            <a class="site-name"
-            href="/">
-                <h1>{{ config.title }}</h1>
-            </a>
-            <div class="site-description">
-                <p>{{ config.description }}</p>
-            </div>
+          <a class="site-name"
+             href="/">
+            <h1>{{ config.title }}</h1>
+          </a>
+          <div class="site-description">
+            <p>{{ config.description }}</p>
+          </div>
         </div>
 
         {% if config.extra.search_path -%}
         {% set search_url = config.extra.search_path  | replace(from="$BASE_URL", to=config.base_url) -%}
         <div class="right-button">
-            <a href="{{ search_url }}" alt="Search" class="{% if current_url and current_url==search_url %}active{%  endif %}">
-                🔎
-            </a>
+          <a href="{{ search_url }}" alt="Search" class="{% if current_url and current_url==search_url %}active{%  endif %}">
+            🔎
+          </a>
         </div>
         {% endif -%}
-    </div>
-        <nav>
-            <div class="links">
-            {% for menu_link in config.extra.menu_links -%}
-                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%}
-                <a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
-                href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a>
-            {% endfor -%}
+      </div>
+      <nav>
+        <div class="links">
+          {% for menu_link in config.extra.menu_links -%}
+          {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%}
+          <a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
+             href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a>
+          {% endfor -%}
 
-            {% if config.extra.overflow_menu_links -%}
+          {% if config.extra.overflow_menu_links -%}
 
-            <details class="overflow-menu dropdown dropdown-right" alt="Menu">
-                <summary>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </summary>
-                <ul>
-                {% for menu_link in config.extra.overflow_menu_links -%}
-                {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%}
-                    <li><a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
-                    href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a></li>
-                {% endfor -%}
-                </ul>
-            </details>
+          <details class="overflow-menu dropdown dropdown-right" alt="Menu">
+            <summary>
+              <div></div>
+              <div></div>
+              <div></div>
+            </summary>
+            <ul>
+              {% for menu_link in config.extra.overflow_menu_links -%}
+              {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%}
+              <li><a {% if current_url and current_url==link_url %}class="active"  {%  endif %}
+                                                                 href="{{ link_url | safe}} " alt="{{menu_link.name}}">{% if menu_link.emoji -%}<span class="emoji">{{ menu_link.emoji }}</span>{% endif -%}<span class="name">{{menu_link.name}}</span></a></li>
+              {% endfor -%}
+            </ul>
+          </details>
 
-            {% endif -%}
+          {% endif -%}
         </div>
 
-        </nav>
+      </nav>
     </header>
     <article>
-    {% block content -%}
-    {% endblock -%}
+      {% block content -%}
+      {% endblock -%}
     </article>
     <footer>
-        <div class="social">
-            <ul>
-                {# Github #}
-                {% if config.extra.link_github_username -%}
-                <li>
-                    <a href="https://github.com/{{ config.extra.link_github_username }}"
-                       title="Github" rel="me"><i data-lucide="github"></i></a>
-                </li>
-                {% endif -%}
+      <div class="social">
+        <ul>
+          {# Github #}
+          {% if config.extra.link_github_username -%}
+          <li>
+            <a href="https://github.com/{{ config.extra.link_github_username }}"
+               title="Github" rel="me"><i data-lucide="github"></i></a>
+          </li>
+          {% endif -%}
 
-                {# Youtube #}
-                {% if config.extra.link_youtube_handle -%}
-                <li>
-                    <a href="https://www.youtube.com/@{{ config.extra.link_youtube_handle }}"
-                       title="YouTube" rel="me"><i data-lucide="youtube"></i></a>
-                </li>
-                {% endif -%}
+          {# Youtube #}
+          {% if config.extra.link_youtube_handle -%}
+          <li>
+            <a href="https://www.youtube.com/@{{ config.extra.link_youtube_handle }}"
+               title="YouTube" rel="me"><i data-lucide="youtube"></i></a>
+          </li>
+          {% endif -%}
 
-                {# Bluesky #}
-                {% if config.extra.link_bluesky_url -%}
-                <li>
-                    <a href="{{ config.extra.link_bluesky_url }}"
-                       title="Bluesky" rel="me"><i data-lucide="message-square"></i></a>
-                </li>
-                {% endif -%}
+          {# Bluesky #}
+          {% if config.extra.link_bluesky_url -%}
+          <li>
+            <a href="{{ config.extra.link_bluesky_url }}"
+               title="Bluesky" rel="me"><i data-lucide="message-square"></i></a>
+          </li>
+          {% endif -%}
 
-                {# Mastadon #}
-                {% if config.extra.link_mastodon_url -%}
-                <li>
-                    <a href="{{ config.extra.link_mastodon_url }}"
-                       title="Mastodon" rel="me"><i data-lucide="message-square"></i></a>
-                </li>
-                {% endif -%}
+          {# Mastadon #}
+          {% if config.extra.link_mastodon_url -%}
+          <li>
+            <a href="{{ config.extra.link_mastodon_url }}"
+               title="Mastodon" rel="me"><i data-lucide="message-square"></i></a>
+          </li>
+          {% endif -%}
 
-                {# Twitter #}
-                {% if config.extra.link_twitter_username -%}
-                <li>
-                    <a href="https://twitter.com/{{ config.extra.link_twitter_username }}"
-                       title="Twitter"
-                       rel="me"><i data-lucide="twitter"></i></a>
-                </li>
-                {% endif -%}
+          {# Twitter #}
+          {% if config.extra.link_twitter_username -%}
+          <li>
+            <a href="https://twitter.com/{{ config.extra.link_twitter_username }}"
+               title="Twitter"
+               rel="me"><i data-lucide="twitter"></i></a>
+          </li>
+          {% endif -%}
 
-                {# Instagram #}
-                {% if config.extra.link_instagram_username -%}
-                <li>
-                    <a href="https://www.instagram.com/{{ config.extra.link_instagram_username }}"
-                       title="Medium"
-                       rel="me"><i data-lucide="instagram"></i></a>
-                </li>
-                {% endif -%}
-                {# Tiktok #}
-                {% if config.extra.link_tiktok_username -%}
-                <li>
-                  <a href="https://www.tiktok.com/@{{ config.extra.link_tiktok_username }}"
-                     title="TikTok"
-                     rel="me">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-                    </svg>
-                  </a>
-                </li>
-                {% endif -%}
-                {# Medium #}
-                {% if config.extra.link_medium_username -%}
-                <li>
-                    <a href="https://medium.com/@{{ config.extra.link_medium_username }}"
-                       title="Medium"
-                       rel="me"><i data-lucide="file-text"></i></a>
-                </li>
-                {% endif -%}
+          {# Instagram #}
+          {% if config.extra.link_instagram_username -%}
+          <li>
+            <a href="https://www.instagram.com/{{ config.extra.link_instagram_username }}"
+               title="Medium"
+               rel="me"><i data-lucide="instagram"></i></a>
+          </li>
+          {% endif -%}
+          {# Tiktok #}
+          {% if config.extra.link_tiktok_username -%}
+          <li>
+            <a href="https://www.tiktok.com/@{{ config.extra.link_tiktok_username }}"
+               title="TikTok"
+               rel="me">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+              </svg>
+            </a>
+          </li>
+          {% endif -%}
+          {# Medium #}
+          {% if config.extra.link_medium_username -%}
+          <li>
+            <a href="https://medium.com/@{{ config.extra.link_medium_username }}"
+               title="Medium"
+               rel="me"><i data-lucide="file-text"></i></a>
+          </li>
+          {% endif -%}
 
-                {# RSS feed #}
-                <li>
-                    <a href="{{ get_url(path='atom.xml',trailing_slash=false)|safe }}"
-                       title="{{config.title}}"><i data-lucide="rss"></i></a>
-                </li>
-            </ul>
-        </div>
-        <p> © {{ config.title }} {{ now() | date(format="%Y") }}
+          {# RSS feed #}
+          <li>
+            <a href="{{ get_url(path='atom.xml',trailing_slash=false)|safe }}"
+               title="{{config.title}}"><i data-lucide="rss"></i></a>
+          </li>
+        </ul>
+      </div>
+      <p> © {{ config.title }} {{ now() | date(format="%Y") }}
 
-        {#  If you remove the powered by information, it would be appreciated if
-            you could add information & links somewhere else on your site to credit
-            those that have created your tools. #}
-        {% if config.extra.disable_powered_by and config.extra.disable_powered_by == true %}{% else %}<br>Powered by <a target="_blank" href="https://getzola.org/">Zola</a>. Theme: <a target="_blank" href="https://github.com/jimmyff/zola-inky">Inky</a>.{% endif %}
-        </p>
+      {#  If you remove the powered by information, it would be appreciated if
+      you could add information & links somewhere else on your site to credit
+      those that have created your tools. #}
+      {% if config.extra.disable_powered_by and config.extra.disable_powered_by == true %}{% else %}<br>Powered by <a target="_blank" href="https://getzola.org/">Zola</a>. Theme: <a target="_blank" href="https://github.com/jimmyff/zola-inky">Inky</a>.{% endif %}
+      </p>
     </footer>
     <script>
-        lucide.createIcons();
+      lucide.createIcons();
     </script>
     {% block body_end -%}
     {% endblock body_end -%}
-</body>
+  </body>
 </html>

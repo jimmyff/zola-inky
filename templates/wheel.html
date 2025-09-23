@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">{{ section.title }}</h1>
+
+<div style="text-align:center;">{{ section.content | safe }}</div>
+ {% endblock content %}
