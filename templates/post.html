@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% block content %}
 
@@ -7,7 +6,7 @@
     <div class="meta">
       <div class="date">
         <span class="day">{{ page.date | date(format='%d')}}</span>
-        <span class="rest">{{ page.date | date(format='%b %y')}}</span>
+        <span class="rest">{{ page.date | date(format='%b %Y')}}</span>
       </div>
     </div>
 
@@ -15,12 +14,12 @@
       <h1 class="title">{{ page.title }} {% if page.draft %}<span class="draft">Draft</span>{% endif %}</h1>
     </div>
   </div>
-  {{ hooks::post_above_content(page=page) }}  
+  {{ <hooks.post_above_content page /> }}
   <article>{{ page.content | safe }}</article>
 
   
-  {{ hooks::post_below_content(page=page) }}  
-  {% if page.taxonomies is containing ("tags") %}
+  {{ <hooks.post_below_content page /> }}
+  {% if page.taxonomies is containing(pat="tags") %}
   <ul class="tags">
     {% for tag in page.taxonomies["tags"] %}
       <li><a href='{{ config.base_url | safe }}/tags/{{ tag | slugify }}'>{{ tag }}</a></li>
@@ -28,6 +27,6 @@
   </ul>
   {% endif %}
   
-  {{ hooks::post_below_tags(page=page) }}  
+  {{ <hooks.post_below_tags page /> }}
 </section>
 {% endblock content %}

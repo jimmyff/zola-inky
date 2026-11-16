@@ -1,4 +1,4 @@
-{% macro general_meta() %}
+{% component head.general_meta(@config) %}
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible"
       content="IE=edge">
@@ -8,4 +8,4 @@
       content="{{ config.description }}" />
 <meta name="keywords"
       content="{{ config.extra.keywords }}" /> 
-{% endmacro general_meta %}
+{% endcomponent head.general_meta %}

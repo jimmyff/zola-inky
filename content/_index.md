@@ -1,8 +1,10 @@
 +++
 title = "Zola-Inky"
-images = []
 template = "index.html"
 in_search_index = true
+
+[extra]
+images = []
 +++
 
 # About this theme

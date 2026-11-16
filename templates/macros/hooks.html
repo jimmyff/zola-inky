@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 
 {# Page hooks #}
-{% macro post_above_content(page) %}{% endmacro post_above_content %}
-{% macro post_below_content(page) %}{% endmacro post_below_content %}
-{% macro post_below_tags(page) %}{% endmacro post_below_tags %}
+{% component hooks.post_above_content(page) %}{% endcomponent hooks.post_above_content %}
+{% component hooks.post_below_content(page) %}{% endcomponent hooks.post_below_content %}
+{% component hooks.post_below_tags(page) %}{% endcomponent hooks.post_below_tags %}
 
-{% macro posts_below_title(page) %}
+{% component hooks.posts_below_title(page) %}
 <span class="description"> {{page.description}} </span>
-{% endmacro posts_below_title %}
+{% endcomponent hooks.posts_below_title %}
 
-
-
-{% macro og_image_tags() %}
-{%- if page.extra.og_preview_img -%}
+{% component hooks.og_image_tags(@page) %}
+{%- if page.extra and page.extra.og_preview_img -%}
 {%- set_global url = get_url(path=page.extra.og_preview_img) | safe -%}
 {%- endif -%}
 
@@ -24,4 +22,4 @@
 #}
 {%- endif -%}
 
-{% endmacro og_image_tags %}
+{% endcomponent hooks.og_image_tags %}

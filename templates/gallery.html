@@ -1,9 +1,11 @@
-
 {% extends "base.html" -%}
 {% block content -%}
 <h1 class="title">{{ section.title }}</h1>
 <article>{{ section.content | safe }}</article>
-{% for year, posts in section.pages | group_by(attribute="year") -%}
+{% set year_groups = section.pages | group_by(attribute="year") %}
+{% set years = year_groups | keys | sort | reverse %}
+{% for year in years %}
+{% set posts = year_groups[year] | sort(attribute="date") | reverse %}
 <ul class="gallery flat">
   <h2 class="archive-year">{{ year }}</h2>
   {% for post in posts -%}
@@ -12,7 +14,7 @@
   {# { set image = resize_image(path=post.path ~ image, width=256, height=256, format=config.extra.image_format, quality=config.extra.thumbnail_quality) %} #}
   <li class="thumbnail">
     <a href="{{ post.permalink | safe }}" title="{{ post.title }} - {{ post.date }}">
-      {{ images::responsive_thumbnail(path=post.colocated_path, src=image, default_size=128, sizes=[128,256], alt=post.title  ~ " - "  ~ post.date ) -}}
+      {{ <responsive_thumbnail path={post.colocated_path} src={image} default_size={128} sizes={[128,256]} alt={post.title  ~ " - "  ~ post.date} /> -}}
     </a>
   </li>
   {% endfor -%}

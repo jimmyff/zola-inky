@@ -1,18 +1,11 @@
-{% import "macros/head.html" as head -%}
-{% import "macros/opengraph.html" as social -%}
-{% import "macros/hooks.html" as hooks -%}
-{% import "macros/images.html" as images -%}
-
-
-
 <!DOCTYPE html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
 <head> 
     {%- block general_meta -%}
-    {{ head::general_meta() }}
+    {{ <head.general_meta /> }}
     {%- endblock general_meta -%}
     {%- block og_preview -%} 
-    {{ social::og_preview() }}
+    {{ <og_preview /> }}
     {%-endblock og_preview -%} 
     {% block rss -%}
     <link rel="alternate"
@@ -31,14 +24,14 @@
     <div class="top">
         {% if config.extra.avatar -%}
 		<div class="avatar">
-			<a href="/">
-                {{ images::responsive_image(path="", src=config.extra.avatar, default_size=128, sizes=[64,128,256], alt=config.title  ) }}
+			<a href="{{ config.base_url }}">
+                {{ <responsive_image path="" src={config.extra.avatar} default_size={128} sizes={[64,128,256]} alt={config.title} /> }}
 			</a>
 		</div>
 	    {% endif -%}
         <div class="details">
             <a class="site-name"
-            href="/">
+            href="{{ config.base_url }}">
                 <h1>{{ config.title }}</h1>
             </a>
             <div class="site-description">

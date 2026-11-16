@@ -1,9 +1,11 @@
 
 # Zola-Inky
 
-> An elegant and understated theme for Zola
+> An elegant and understated theme for Zola v0.23.6 or higher
 
 Zola Inky ([view demo](https://jimmyff.github.io/zola-inky)) is a theme by [jimmyff](https://github.com/jimmyff) and [mr-karan](https://github.com/mr-karan) for the [Zola](https://www.getzola.org/) static site generator. This theme was originally based on the [hugo-ink](https://github.com/knadh/hugo-ink) theme, ported by mr-karan. It was then packaged and developed further by jimmyff. The theme is available on [Github](https://github.com/jimmyff/zola-inky) under the MIT license, for more information on how to use it please see the [readme](https://github.com/jimmyff/zola-inky/blob/main/README.md) and check the [changelog](https://github.com/jimmyff/zola-inky/blob/main/CHANGELOG.md) for a list of the latest changes.
+
+Note that this requires Zola v0.23.6 or higher, due to breaking changes in Zola.
 
 [![PNG](screenshot.png)](https://jimmyff.github.io/zola-inky)
 
@@ -23,7 +25,7 @@ For latest changes please see the [changelog](CHANGELOG.md).
 ## Getting started
 
 1. Add this theme to your `themes/` folder (recommended method: git submodule).
-2. Copy of the the theme's config.toml file and put in your projects root directory. Update it as required and don't forget to add `theme = 'zola-inky'` at the top of the file.
+2. Copy the the theme's config.toml file and put in your site's root directory as zola.toml or config.toml. Update it as required and don't forget to add `theme = 'zola-inky'` at the top of the file.
 3. Copy this contents of the `content/` directory the root of your project and change the files as your necessary.
 
 ## Customising the theme
@@ -37,7 +39,7 @@ For latest changes please see the [changelog](CHANGELOG.md).
 Using the responsive images will make sure your images are generated at various sizes and served up to viewers at the size that best suits their device via the image srcset attribute. You can use this feature in your markdown like so:
 
 ```md
-{{ image(src="yourimage.jpg", alt="This is my image") }}
+{{ <image src="yourimage.jpg" alt="This is my image" /> }}
 ```
 
 ## Feature requests & support

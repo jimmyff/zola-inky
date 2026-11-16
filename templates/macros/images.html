@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
 
-{% macro image_absolute(path, src, alt, class="") -%}
+{% component image_absolute(path, src, alt, class="") -%}
 <img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=src) | safe }}" class="{{ class }}" />
-{% endmacro image_absolute -%}
+{% endcomponent image_absolute -%}
 
-{% macro image(path, src, alt, class="") -%}
-<img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=path ~ src) | safe }}" class="{{ class }}" />
-{% endmacro image -%}
+{% component image(path = "", src, alt, class="") -%}
+<img alt="{{ alt }}" title="{{ alt }}" src="{{ (path ~ src) | safe }}" class="{{ class }}" />
+{% endcomponent image -%}
 
 {# 
     Original author: crepererum https://github.com/getzola/even/pull/48/files 
     Adapted to Inky template by jimmyff
 #}
 
-{% macro responsive_image(path, src, alt, default_size, sizes, class="") -%}
+{% component responsive_image(@config, path, src, alt, default_size, sizes, class="") -%}
 {% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true -%}
 {# ZOLA BUG? Can't use get_url doesn't work here... as this fails for some reason... #}
 {# <img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path="/content" ~ src) | safe }}" class="{{ class }}" />
@@ -24,21 +24,15 @@
     {% set abspath = path ~ src  -%}
     {% set meta = get_image_metadata(path=abspath) -%}
     {% set width = meta.width -%}
-    {% set srcset_list = [] -%}
-    {% for s in sizes -%}
-    {% if width >= s -%}
-    {% set resized = resize_image(format=config.extra.image_format, path=abspath, width=s, op="fit_width", quality=config.extra.image_quality) -%}
-    {% set element = resized.url ~ " " ~ s ~ "w" -%}
-    {% set_global srcset_list = srcset_list | concat(with=[element]) -%}
-    {% endif -%}
-    {% endfor -%}
+    {% set resized_image_list = [resize_image(format=config.extra.image_format, path=abspath, width=s, op="fit_width", quality=config.extra.image_quality) for s in sizes if width >= s] -%}
+    {% set srcset_list = [(i.url ~ " " ~ i.width ~ "w") for i in resized_image_list] -%}
     {% set default_resized = resize_image(format=config.extra.image_format, path=abspath, width=default_size, op="fit_width", quality=config.extra.image_quality) -%}
     <img alt="{{ alt }}" title="{{ alt }}" src="{{ default_resized.url | safe }}" srcset="{{ srcset_list | join(sep=", ") | safe }}" class="{{ class }}" />
 {% endif -%}
-{% endmacro responsive_image -%}
+{% endcomponent responsive_image -%}
 
 
-{% macro responsive_image_url(path, src, width, height, op="fill") -%}
+{% component responsive_image_url(@config, path, src, width, height, op="fill") -%}
 {% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true -%}
 {# ZOLA BUG? Can't use get_url doesn't work here... as this fails for some reason... #}
 {# <img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path="/content" ~ src) | safe }}" class="{{ class }}" />
@@ -54,10 +48,10 @@
     {{ resized.url | safe }}
     {# {% endif -%} #}
 {% endif -%}
-{% endmacro responsive_image_url -%}
+{% endcomponent responsive_image_url -%}
 
 
-{% macro responsive_thumbnail(path, src, alt, default_size, sizes, class="") -%}
+{% component responsive_thumbnail(@config, path, src, alt, default_size, sizes, class="") -%}
 {% if config.extra.image_resizing_disabled and config.extra.image_resizing_disabled == true -%}
 {# <img alt="{{ alt }}" title="{{ alt }}" src="{{ get_url(path=path ~ src) | safe }}" class="{{ class }}" /> #}
 {# ZOLA BUG? Can't use get_url doesn't work here... as this fails for some reason... #}
@@ -68,15 +62,9 @@
     {% set abspath = path ~ src  -%}
     {% set meta = get_image_metadata(path=abspath) -%}
     {% set width = meta.width -%}
-    {% set srcset_list = [] -%}
-    {% for s in sizes -%}
-    {% if width >= s -%}
-    {% set resized = resize_image(format=config.extra.image_format, path=abspath, width=s, height=s, op="fill", quality=config.extra.thumbnail_quality) -%}
-    {% set element = resized.url ~ " " ~ s ~ "w" -%}
-    {% set_global srcset_list = srcset_list | concat(with=[element]) -%}
-    {% endif -%}
-    {% endfor -%}
+    {% set resized_image_list = [resize_image(format=config.extra.image_format, path=abspath, width=s, height=s, op="fill", quality=config.extra.thumbnail_quality) for s in sizes if width >= s] -%}
+    {% set srcset_list = [(i.url ~ " " ~ i.width ~ "w") for i in resized_image_list] -%}
     {% set default_resized = resize_image(format=config.extra.image_format, path=abspath, width=default_size, height=default_size, op="fill", quality=config.extra.thumbnail_quality) -%}
     <img alt="{{ alt }}" title="{{ alt }}" src="{{ default_resized.url | safe }}" srcset="{{ srcset_list | join(sep=", ") | safe }}" class="{{ class }}" />
 {% endif -%}
-{% endmacro responsive_thumbnail -%}
+{% endcomponent responsive_thumbnail -%}
