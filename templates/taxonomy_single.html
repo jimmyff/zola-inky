@@ -3,7 +3,10 @@
 {% block content %}
 <h1>{{taxonomy.name | capitalize }} &raquo; {{ term.name | capitalize }}</h1>
 
-{%  for year, posts in  term.pages | group_by(attribute="year")  %}
+{% set year_groups = term.pages | group_by(attribute="year") %}
+{% set years = year_groups | keys | sort | reverse %}
+{% for year in years %}
+{% set posts = year_groups[year] | sort(attribute="date") | reverse %}
 <ul class="posts flat">
     <h2 class="archive-year">{{ year }}</h2>
     {% for post in posts %}
@@ -20,7 +23,7 @@
             <a href="{{ post.permalink | safe }}">{{ post.title }}</a>
             {% if post.draft %}<span class="draft">(Draft)</span>{% endif %}
           </div>
-          {{ hooks::posts_below_title(page=post) }} 
+          {{ <hooks.posts_below_title page={post} /> }}
         </div>
       </div>
     </li>

@@ -1,3 +1,4 @@
+{% component youtube(id, autoplay = false, class="") -%}
 <div class="youtube{% if class %} {{class}}{% endif %}"><div class="inner">
     <iframe  src="https://www.youtube.com/embed/{{id}}{% if autoplay %}?autoplay=1{% endif %}"
     webkitallowfullscreen
@@ -5,3 +6,4 @@
     allowfullscreen>
     </iframe>
 </div></div>
+{% endcomponent youtube %}
